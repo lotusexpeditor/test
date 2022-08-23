@@ -6,7 +6,7 @@ services:
     build:
         context: .
         dockerfile: Dockerfile
-    image: testtraefik
+    image: testtraefik:v2
     working_dir: /test
     command: python3 serve.py
     restart: always
