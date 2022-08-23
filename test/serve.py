@@ -13,7 +13,7 @@ PORT = 8008
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.write_response(b'')
+        self.write_response(b'Merhaba dunya')
 
     def do_POST(self):
         content_length = int(self.headers.get('content-length', 0))
