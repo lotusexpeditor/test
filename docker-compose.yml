@@ -1,0 +1,29 @@
+
+version: "3.8"
+services:
+      
+  test:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    image: testtraefik
+    working_dir: /test
+    command: python3 serve.py
+    restart: always
+    env_file:
+      - stack.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test.rule=Host(`testtraefik.medsnf.org`)"
+      - "traefik.http.services.test.loadbalancer.server.port=8008"
+      - "traefik.http.routers.test.entrypoints=websecure"
+      - "traefik.http.routers.test.service=test"
+      - "traefik.http.routers.test.tls.certresolver=leresolver"
+    networks:
+      - t_nwk
+      - default
+
+networks:
+  t_nwk:
+    name: traefik_network
+    external: true
